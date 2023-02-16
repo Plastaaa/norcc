@@ -56,7 +56,7 @@ export default class SimpleSlider extends Component {
     if(slide.idSlidePK){
       return(
         <SplideSlide>
-          <Image className="rounded-2xl border border-gray-500" alt="Image Slider" priority={true} src={img6mobile} width={1000} layout="responsive" height={1000} quality={100}/>
+          <Image className="rounded-2xl border border-gray-500" alt="Image Slider" priority={true} src={slide.src} width={1000} layout="responsive" height={1000} quality={100}/>
           <div className="absolute text-sm md:text-xl lg:text-2xl text-gray left-1/2 bottom-0 -translate-x-1/2 -translate-y-1/2">
             <a href={slide.urlDest}>
               <button className={slide.bgColorBTN +" "+ slide.textColorBTN + 'flex flex-wrap bg-red-900 text-white hover:bg-red-800 hover:dark:text-white hover:dark:bg-green-700 dark:text-gray-100 hover:text-white border shadow-lg hover:border-white border-white rounded-lg p-2'}>
