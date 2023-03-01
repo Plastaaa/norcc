@@ -17,8 +17,9 @@ export default class SearchResult extends React.Component {
         const kmMaxURL = queryParams.get('kmMax');
         const placeURL = queryParams.get('place');
         const refURL = queryParams.get('ref');
-        //const choixConcessURL = queryParams.get('concession');
+        const choixConcessURL = queryParams.get('concession');
         const pageURL = queryParams.get('page');
+        const triURL = queryParams.get('orderBy');
         axios.get(`https://nunesaccount.alwaysdata.net/APIDG8/getCCByParamDev.php`,{
             params:{
                 etat: etatURL,
@@ -35,6 +36,7 @@ export default class SearchResult extends React.Component {
                 ref: refURL,
                 concess: "Normandie Camping-Car",
                 concesss: 12,
+                orderBy: triURL,
                 page: pageURL,
             }
         })

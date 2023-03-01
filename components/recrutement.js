@@ -56,6 +56,16 @@ export default class Recrutement extends React.Component {
                     obj: this.state.objet,
                 }
                 })
+                axios.get(`https://nunesaccount.alwaysdata.net/APIDG8/addStatContact.php`,{
+                params:{
+                    nomcontact: "Contact Recrutement"
+                }
+                })
+                axios.get(`https://nunesaccount.alwaysdata.net/APIDG8/sendReturnContact.php`,{
+                    params:{
+                        mail: this.state.mail
+                    }
+                })
             }
         }
     }

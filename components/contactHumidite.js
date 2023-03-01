@@ -72,6 +72,16 @@ export default class ContactHumidite extends React.Component {
                     annee: this.state.annee,
                 }
                 })
+                axios.get(`https://nunesaccount.alwaysdata.net/APIDG8/addStatContact.php`,{
+                params:{
+                    nomcontact: "Contact Controle Humidite"
+                }
+                })
+                axios.get(`https://nunesaccount.alwaysdata.net/APIDG8/sendReturnContact.php`,{
+                    params:{
+                        mail: this.state.mail
+                    }
+                })
             }
         }
     }
@@ -90,7 +100,7 @@ export default class ContactHumidite extends React.Component {
     render(){
         return (
             <div className="overflow-hidden">
-                <div className="py-2 lg:py-2">
+                <div className="py-2 lg:py-2 max-w-screen-md">
                     <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">RDV Contrôle d'humidité</h2>
                     <p className="mb-8 lg:mb-8 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Prendre contact pour un rendez vous dans nos ateliers afin de contrôler le niveau d'humidité de votre véhicule de loisirs.</p>
                     <CVideOuQuoiLaVariable 
@@ -161,7 +171,7 @@ export default class ContactHumidite extends React.Component {
                         </div>
                         <input type="text" id="age" className="hidden" name="age" required/>
                         
-                        <div className="w-full xs:w-full sm:w-full px-4 py-4">
+                        <div className="w-full xs:w-full sm:w-full md:w-1/2 lg:w-full xl:w-1/2 px-4 py-4">
                             <div className="w-full py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-green-800 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                                 <button onClick={this.stateSend} className="w-full">Envoyer</button>
                             </div>

@@ -56,6 +56,16 @@ export default class Contact extends React.Component {
                     obj: this.state.objet,
                 }
                 })
+                axios.get(`https://nunesaccount.alwaysdata.net/APIDG8/addStatContact.php`,{
+                params:{
+                    nomcontact: "Contact General"
+                }
+                })
+                axios.get(`https://nunesaccount.alwaysdata.net/APIDG8/sendReturnContact.php`,{
+                    params:{
+                        mail: this.state.mail
+                    }
+                })
             }
         }
     }
@@ -73,6 +83,7 @@ export default class Contact extends React.Component {
                 <div className="py-2 lg:py-2 px-4 mx-auto max-w-screen-md">
                     <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Contact</h2>
                     <p className="mb-8 lg:mb-8 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Prendre contact avec nos équipes.</p>
+                    <p className="tel_contact"><a href="tel:0969396973">09 69 39 69 73</a></p>
                     <CVideOuQuoiLaVariable 
                         dejaSend={this.state.dejaSend}
                         isSetName={this.state.nom} 

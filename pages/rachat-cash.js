@@ -110,6 +110,16 @@ export default class Contact extends React.Component {
                     thum: this.state.thum,
                 }
                 })
+                axios.get(`https://nunesaccount.alwaysdata.net/APIDG8/addStatContact.php`,{
+                params:{
+                    nomcontact: "Contact RACHAT CASH"
+                }
+                })
+                axios.get(`https://nunesaccount.alwaysdata.net/APIDG8/sendReturnContact.php`,{
+                    params:{
+                        mail: this.state.mail
+                    }
+                })
             }
         }
     }
@@ -130,8 +140,8 @@ export default class Contact extends React.Component {
         return(
             <div>
                 <Helmet>
-                    <title>Normandie Camping-car - Rachat Cash</title>
-                    <meta name="description" content="Vous désirez vendre votre véhicules ? Auto Camping-car Service vous propose un service de rachat cash. Prenez contact avec notre équipe. "/>
+                    <title>DG8 Camping-car - Rachat Cash</title>
+                    <meta name="description" content="Vous désirez vendre votre véhicules ? DG8 camping car vous propose un service de rachat cash. Prenez contact avec notre équipe. "/>
                 </Helmet>
                 <div>
                     <NavBar/>

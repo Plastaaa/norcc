@@ -74,6 +74,16 @@ export default class RDVAtelier extends React.Component {
                     inter: this.state.inter,
                 }
                 })
+                axios.get(`https://nunesaccount.alwaysdata.net/APIDG8/addStatContact.php`,{
+                params:{
+                    nomcontact: "Contact RDV Atelier"
+                }
+                })
+                axios.get(`https://nunesaccount.alwaysdata.net/APIDG8/sendReturnContact.php`,{
+                    params:{
+                        mail: this.state.mail
+                    }
+                })
             }
         }
     }

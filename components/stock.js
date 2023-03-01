@@ -150,6 +150,13 @@ export default class Stock extends React.Component {
           this.setState({page: pageURL})
         }
 
+        const triURL = queryParams.get('orderBy');
+        if(triURL == "undefined" || triURL == "null" || triURL == null){
+          this.setState({tri: ""})
+        }else{
+          this.setState({tri: triURL})
+        }
+
         const choixConcessURL = queryParams.get('concession');
         this.setState({concession: choixConcessURL})
 
@@ -173,7 +180,7 @@ export default class Stock extends React.Component {
 
   stateSend = (props) => {
 
-    window.location.replace("/stock?etat="+this.state.etat+"&gamme="+this.state.gamme+"&marque="+this.state.marque+"&anneeMin="+this.state.yearMin+"&anneeMax="+this.state.yearMax+"&porteur="+this.state.porteur+"&prixMin="+this.state.prixMin+"&prixMax="+this.state.prixMax+"&kmMin="+this.state.kmMin+"&kmMax="+this.state.kmMax+"&place="+this.state.placeCG+"&ref="+this.state.ref+"&page=1")
+    window.location.replace("/stock?etat="+this.state.etat+"&gamme="+this.state.gamme+"&marque="+this.state.marque+"&anneeMin="+this.state.yearMin+"&anneeMax="+this.state.yearMax+"&porteur="+this.state.porteur+"&prixMin="+this.state.prixMin+"&prixMax="+this.state.prixMax+"&kmMin="+this.state.kmMin+"&kmMax="+this.state.kmMax+"&place="+this.state.placeCG+"&ref="+this.state.ref+"&concession="+this.state.concession+"&orderBy="+this.state.tri+"&page=1")
 
   }
 
@@ -181,13 +188,13 @@ export default class Stock extends React.Component {
     const queryParams = new URLSearchParams(window.location.search);
     const page = queryParams.get('page');
 
-    var totPage = 2
+    var totPage = + this.state.nbCC / 20;
     if(page <= totPage){
       var newpage = +page + 1;
-      window.location.replace("/stock?etat="+this.state.etat+"&gamme="+this.state.gamme+"&marque="+this.state.marque+"&anneeMin="+this.state.yearMin+"&anneeMax="+this.state.yearMax+"&porteur="+this.state.porteur+"&prixMin="+this.state.prixMin+"&prixMax="+this.state.prixMax+"&kmMin="+this.state.kmMin+"&kmMax="+this.state.kmMax+"&place="+this.state.placeCG+"&ref="+this.state.ref+"&page="+newpage)
+      window.location.replace("/stock?etat="+this.state.etat+"&gamme="+this.state.gamme+"&marque="+this.state.marque+"&anneeMin="+this.state.yearMin+"&anneeMax="+this.state.yearMax+"&porteur="+this.state.porteur+"&prixMin="+this.state.prixMin+"&prixMax="+this.state.prixMax+"&kmMin="+this.state.kmMin+"&kmMax="+this.state.kmMax+"&place="+this.state.placeCG+"&concession="+this.state.concession+"&orderBy="+this.state.tri+"&page="+newpage)
     }else{
       document.getElementById("btnNext").disabled = true;
-      document.getElementById("btnNext").style.backgroundColor = 'gray'
+      document.getElementById("btnPrec").style.backgroundColor = 'gray'
     }
   }
 
@@ -201,7 +208,7 @@ export default class Stock extends React.Component {
       document.getElementById("btnPrec").style.backgroundColor = 'gray'
     }else{
       var newpage = +page - 1;
-      window.location.replace("/stock?etat="+this.state.etat+"&gamme="+this.state.gamme+"&marque="+this.state.marque+"&anneeMin="+this.state.yearMin+"&anneeMax="+this.state.yearMax+"&porteur="+this.state.porteur+"&prixMin="+this.state.prixMin+"&prixMax="+this.state.prixMax+"&kmMin="+this.state.kmMin+"&kmMax="+this.state.kmMax+"&place="+this.state.placeCG+"&ref="+this.state.ref+"&concession="+this.state.concession+"&page="+newpage)
+      window.location.replace("/stock?etat="+this.state.etat+"&gamme="+this.state.gamme+"&marque="+this.state.marque+"&anneeMin="+this.state.yearMin+"&anneeMax="+this.state.yearMax+"&porteur="+this.state.porteur+"&prixMin="+this.state.prixMin+"&prixMax="+this.state.prixMax+"&kmMin="+this.state.kmMin+"&kmMax="+this.state.kmMax+"&place="+this.state.placeCG+"&concession="+this.state.concession+"&orderBy="+this.state.tri+"&page="+newpage)
     }
   }
 
@@ -332,9 +339,26 @@ export default class Stock extends React.Component {
                       <div className="my-1 px-1 w-1/2">
                         <input placeholder="Réference" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" type="text" name="ref" value={this.state.ref} onSubmit={this.stateChange} onChange={this.stateChange}/>
                       </div>
-                      <button className="bg-green-800 hover:bg-green-700 text-white font-bold py-2 px-4 w-full rounded-lg" onClick={this.stateSend}>
-                        Rechercher
-                      </button>
+                      <div className="w-full">
+                        <div className="flex flex-wrap">
+                            <div className="w-1/2 my-1 px-1">
+                              <form>
+                                <label>
+                                    <select className="dropdown bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" value={this.state.tri} name="tri" onChange={this.stateChange}>
+                                        <option value="0">Trier</option>
+                                        <option value="ASC">Prix croissant</option>
+                                        <option value="DESC">Prix décroissant</option>
+                                    </select>
+                                </label>
+                              </form>
+                            </div>
+                            <div className="w-1/2 my-1 px-1">
+                              <button className="bg-green-800 hover:bg-green-700 text-white font-bold py-2 px-4 w-full rounded-lg" onClick={this.stateSend}>
+                                Rechercher
+                              </button>
+                            </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
