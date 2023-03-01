@@ -186,6 +186,41 @@ function NbCouchage(props){
     }
 }
 
+
+function IsThereVideo(props){
+    const video = props.video;
+    if(video == "undefined" || video == "" || video == undefined){
+        return <NoVideo/>
+    }
+    return <Video video={video}/>
+}
+
+function NoVideo(props){
+    return <p></p>
+}
+
+function Video(props){
+    const video = props.video;
+    return(
+        <div className='flex flex-wrap'>
+            <div className='w-full'>
+                <h2 className="mb-4 text-2xl tracking-tight font-extrabold text-gray-900 dark:text-white">Présentation vidéo du modèle :</h2>
+                <iframe
+                    style={{
+                        width: "100%",
+                        backgroundColor: "#ccc",
+                        borderRadius: "3px",
+                        height: "50vw",
+                    }}
+                    src={`https://www.youtube.com/embed/${video}`}
+                />
+            </div>
+        </div>
+    )
+}
+
+
+
 export default class VehiculeUnique extends React.Component {
     componentDidMount() {
         axios.get(`https://nunesaccount.alwaysdata.net/APIDG8/getCCDetailById.php?id=${window.location.pathname.split('/')[2]}&concess=12`)
@@ -556,6 +591,9 @@ export default class VehiculeUnique extends React.Component {
                             <MapBis concess={cc.libelle} latitude={cc.latitude} longitude={cc.longitude}/>
                         </div>
                     </div>
+                </div>
+                <div className='lg:px-32 md:px-16 px-4'> 
+                    <IsThereVideo video={this.state.video}/>
                 </div>
                 <div className='pb-4'>
                     <SlideMarc/>
