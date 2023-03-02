@@ -10,7 +10,7 @@ export default function Home(){
     return (
         <div>
             <Helmet>
-                <title>Normandie Camping-car - Nos concessions</title>
+                <title>Normandie Camping Car - Nos concessions</title>
                 <meta name="description" content="Découvrez nos différentes concessions, plus d'une dizaines situées de la frontière Suisse jusqu'à Caen. Contactez nous pour plus d'informations. "/>
             </Helmet>
             <div>

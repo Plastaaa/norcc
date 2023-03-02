@@ -52,6 +52,12 @@ export default class Stock extends React.Component {
           this.setState({ concess });
         });
 
+        axios.get(`https://nunesaccount.alwaysdata.net/APIDG8/getNbCC.php`)
+        .then(res => {
+          const nb = res.data;
+          this.setState({nb: nb[0].nb});
+        });
+
         this.setState({
           affiche: true,
         }); 
@@ -157,8 +163,7 @@ export default class Stock extends React.Component {
           this.setState({tri: triURL})
         }
 
-        const choixConcessURL = queryParams.get('concession');
-        this.setState({concession: choixConcessURL})
+        this.setState({concession: "Carpiquet Camping-Car"})
 
   }
 
@@ -194,7 +199,7 @@ export default class Stock extends React.Component {
       window.location.replace("/stock?etat="+this.state.etat+"&gamme="+this.state.gamme+"&marque="+this.state.marque+"&anneeMin="+this.state.yearMin+"&anneeMax="+this.state.yearMax+"&porteur="+this.state.porteur+"&prixMin="+this.state.prixMin+"&prixMax="+this.state.prixMax+"&kmMin="+this.state.kmMin+"&kmMax="+this.state.kmMax+"&place="+this.state.placeCG+"&concession="+this.state.concession+"&orderBy="+this.state.tri+"&page="+newpage)
     }else{
       document.getElementById("btnNext").disabled = true;
-      document.getElementById("btnPrec").style.backgroundColor = 'gray'
+      document.getElementById("btnNext").style.backgroundColor = 'gray'
     }
   }
 
@@ -374,12 +379,17 @@ export default class Stock extends React.Component {
                       }
                     </div>
                     <div className="flex flex-wrap">
-                      <div className="px-8 pb-8 pt-4 w-1/2">
+                      <div className="px-8 pb-8 pt-4 w-1/3">
                         <button className="bg-green-800 hover:bg-green-700 text-white font-bold py-2 px-4 w-full rounded-lg" id="btnPrec" onClick={this.statePagePrev}>
                           Page précédente
                         </button>
                       </div>
-                      <div className="px-8 pb-8 pt-4 w-1/2">
+                      <div className="px-8 pb-8 pt-4 w-1/3">
+                        <button className="bg-green-800 hover:bg-green-700 text-white font-bold py-2 px-4 w-full rounded-lg" disabled id="nbcc">
+                          {this.state.nb} résultats
+                        </button>
+                      </div>
+                      <div className="px-8 pb-8 pt-4 w-1/3">
                         <button className="bg-green-800 hover:bg-green-700 text-white font-bold py-2 px-4 w-full rounded-lg" id="btnNext" onClick={this.statePageNext}>
                           Page suivante
                         </button>
