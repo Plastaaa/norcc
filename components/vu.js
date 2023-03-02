@@ -227,6 +227,13 @@ export default class VehiculeUnique extends React.Component {
           .then(res => {
             const campingcar = res.data;
             this.setState({ campingcar });
+            axios.get(`https://nunesaccount.alwaysdata.net/APIDG8/getVideoByCCName.php?concess=0&nom=${cc.marque+" "+cc.modele+" "+cc.version}`)
+                .then(res2 => {
+                    const video = res2.data[0].src;
+                    this.setState({ video });
+                    //console.log(video[0].src)
+                }
+            )
         })
 
         axios.get(`https://nunesaccount.alwaysdata.net/APIDG8/getAllVisualsByCC.php?id=${window.location.pathname.split('/')[2]}&concess=12`)
