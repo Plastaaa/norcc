@@ -193,7 +193,7 @@ export default class Stock extends React.Component {
     const queryParams = new URLSearchParams(window.location.search);
     const page = queryParams.get('page');
 
-    var totPage = + this.state.nbCC / 20;
+    var totPage = + this.state.nb / 20;
     if(page <= totPage){
       var newpage = +page + 1;
       window.location.replace("/stock?etat="+this.state.etat+"&gamme="+this.state.gamme+"&marque="+this.state.marque+"&anneeMin="+this.state.yearMin+"&anneeMax="+this.state.yearMax+"&porteur="+this.state.porteur+"&prixMin="+this.state.prixMin+"&prixMax="+this.state.prixMax+"&kmMin="+this.state.kmMin+"&kmMax="+this.state.kmMax+"&place="+this.state.placeCG+"&concession="+this.state.concession+"&orderBy="+this.state.tri+"&page="+newpage)
